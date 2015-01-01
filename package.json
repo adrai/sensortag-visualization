@@ -1,0 +1,37 @@
+{
+  "name": "sensortag-visualization",
+  "version": "0.0.1",
+  "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">= 0.8.x",
+    "npm": ">= 2.x.x"
+  },
+  "dependencies": {
+    "body-parser": "1.9.2",
+    "compression": "1.2.0",
+    "cookie": "0.1.2",
+    "cookie-parser": "1.3.3",
+    "errorhandler": "1.2.2",
+    "express": "4.10.6",
+    "express-session": "1.9.1",
+    "helmet": "0.5.1",
+    "lodash": "2.4.1",
+    "proxy-middleware": "0.7.0",
+    "sessionstore": "1.0.5",
+    "tingodb": "0.3.1",
+    "viewmodel": "1.2.4",
+    "winston": "0.8.3"
+  },
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "gulp": "^3.8.10",
+    "gulp-mocha": "^2.0.0",
+    "gulp-shell": "^0.2.11"
+  },
+  "scripts": {
+    "preinstall": "cd client && npm install && cd ..",
+    "start": "node server.js",
+    "test": "gulp test"
+  }
+}
