@@ -1,5 +1,5 @@
 var pkg = require('./package.json'),
-  path = require('path');
+    path = require('path');
 
 var settings = {
   name: pkg.name,

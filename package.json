@@ -17,9 +17,11 @@
     "express-session": "1.9.1",
     "helmet": "0.5.1",
     "lodash": "2.4.1",
+    "node-uuid": "1.4.2",
     "proxy-middleware": "0.7.0",
     "sensortag": "0.1.9",
     "sessionstore": "1.0.5",
+    "socket.io": "1.2.1",
     "tingodb": "0.3.1",
     "viewmodel": "1.2.4",
     "winston": "0.8.3"
