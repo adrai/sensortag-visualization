@@ -31,6 +31,8 @@ settings.repository = {
 
 settings.port = 1987;
 
+settings.simulateSensor = true;
+
 // process.env.DEPLOY_TYPE = process.env.DEPLOY_TYPE || 'local';
 
 // if (process.env.DEPLOY_TYPE && fs.existsSync(path.join(__dirname, 'settings/' + process.env.DEPLOY_TYPE + '.js'))) {

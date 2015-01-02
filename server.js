@@ -16,7 +16,7 @@ var LOGGER = logging.init(options.logging).getLogger('server');
 var web = webserver(options);
 var socket = socketserver(options);
 
-var sensor = sensortag();
+var sensor = sensortag(options.simulateSensor);
 
 sensor.on('event', function (evt) {
   if (LOGGER.level === 'debug') {
