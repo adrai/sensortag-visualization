@@ -26,7 +26,7 @@ settings.sessionSecret = 'very_secret';
 
 settings.repository = {
   type: 'tingodb',
-  dbName: 'data'
+  dbPath: __dirname
 };
 
 settings.port = 1987;

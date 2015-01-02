@@ -27,11 +27,11 @@ module.exports = React.createClass({
                 someparam="hello">
                 Home
               </NavItemLink>
-              <NavItemLink
+              {/*<NavItemLink
                 to="todos"
                 someparam="hello2">
                 Todos
-              </NavItemLink>
+              </NavItemLink>*/}
             </Nav>
           </Navbar>
         </header>

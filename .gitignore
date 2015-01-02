@@ -20,3 +20,5 @@ coverage/
 .config
 .node-gyp
 .npm
+
+*.tingo

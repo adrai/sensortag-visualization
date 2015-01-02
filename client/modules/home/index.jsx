@@ -5,9 +5,9 @@ module.exports = React.createClass({
 
   mixins: [AsyncReactComponent],
 
-  bundle: require('bundle?lazy!./components/todos.js'),
+  bundle: require('bundle?lazy!./home.jsx'),
 
-  preRender() {
+  preRender: function () {
     return <div>Loading...</div>
   }
 });

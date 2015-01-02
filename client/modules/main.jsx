@@ -5,14 +5,13 @@ var Router = require('react-router'),
     NotFoundRoute = Router.NotFoundRoute,
     Routes = Router.Routes;
 
-var App = require('./app');
-var Home = require('./home');
-var Todos = require('./todos');
+var App = require('./app.jsx');
+var Home = require('./home/index.jsx');
 
 var routes = (
   <Route name="layout" path="/" handler={App}>
     <DefaultRoute name="home" handler={Home} />
-    <Route name="todos" handler={Todos} />
+    {/*<Route name="todos" handler={Todos} />*/}
   </Route>
 );
 
