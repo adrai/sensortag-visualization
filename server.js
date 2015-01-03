@@ -15,7 +15,7 @@ var LOGGER = logging.init(options.logging).getLogger('server');
 
 var web = webserver(options);
 var socket = socketserver(options);
-var sensor = sensortag(options.simulateSensor);
+var sensor = sensortag(options.sensorSimulation);
 
 denormalizer(options.repository, function (err, denorm) {
   if (err) {

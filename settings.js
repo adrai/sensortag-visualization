@@ -31,7 +31,11 @@ settings.repository = {
 
 settings.port = 1987;
 
-settings.simulateSensor = true;
+settings.sensorSimulation = {
+  enable: true,
+  connectAfter: 3 * 1000,
+  disconnectAfter: 20 * 1000
+};
 
 // process.env.DEPLOY_TYPE = process.env.DEPLOY_TYPE || 'local';
 
