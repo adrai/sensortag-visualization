@@ -1,4 +1,5 @@
 'use strict';
+
 var Reflux = require('reflux'),
   api = require('./api');
 
@@ -8,6 +9,12 @@ var actions = {
     'loadSensor',
     'loadedSensor',
     'failedLoadingSensor'
+  ]),
+
+  evt: Reflux.createActions([
+    'connected',
+    'disconnected',
+    'rssiUpdated'
   ])
 
 };
@@ -18,7 +25,7 @@ actions.server.loadSensor.preEmit = function () {
     if (err) {
       return actions.server.failedLoadingSensor(err);
     }
-console.log(data);
+
     return actions.server.loadedSensor(data);
   });
 };
