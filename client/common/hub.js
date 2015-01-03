@@ -38,7 +38,9 @@ var socket = {
   },
 
   emit: function(data, callback) {
-    data.id = uuid.v4();
+    if (!data.id) {
+      data.id = uuid.v4();
+    }
     console.log('emit cmd: ', data.name);
     this.io.emit('command', data);
 

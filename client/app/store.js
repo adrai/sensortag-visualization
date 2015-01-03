@@ -35,7 +35,7 @@ module.exports = Reflux.createStore({
     this.sensor = sensor;
     this.sensor.state = 'discovered';
 
-    console.log('updated sensor info: ', this.sensor);
+    console.log('updated sensor info: [discovered]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },
@@ -43,7 +43,7 @@ module.exports = Reflux.createStore({
     this.sensor = sensor;
     this.sensor.state = 'connected';
 
-    console.log('updated sensor info: ', this.sensor);
+    console.log('updated sensor info: [connected]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },
@@ -52,7 +52,7 @@ module.exports = Reflux.createStore({
     this.sensor = sensor;
     this.sensor.state = 'disconnected';
 
-    console.log('updated sensor info: ', this.sensor);
+    console.log('updated sensor info: [disconnected]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },
@@ -60,7 +60,7 @@ module.exports = Reflux.createStore({
   onRssiUpdated: function (rssi) {
     this.sensor.rssi = rssi;
 
-    console.log('updated sensor info: ', this.sensor);
+    console.log('updated sensor info: [rssiUpdated]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },

@@ -1,7 +1,8 @@
 'use strict';
 
 var Reflux = require('reflux'),
-  api = require('./api');
+  api = require('./api'),
+  Command = require('../common/command');
 
 var actions = {
 
@@ -11,6 +12,11 @@ var actions = {
     'failedLoadingSensor'
   ]),
 
+  cmd: Reflux.createActions([
+    'connect',
+    'disconnect'
+  ]),
+
   evt: Reflux.createActions([
     'discovered',
     'connected',
@@ -18,6 +24,14 @@ var actions = {
     'rssiUpdated'
   ])
 
+};
+
+// Commands
+actions.cmd.connect.preEmit = function (sensorTagId, callback) {
+  (new Command('connect', sensorTagId)).emit(callback);
+};
+actions.cmd.disconnect.preEmit = function (sensorTagId, callback) {
+  (new Command('disconnect', sensorTagId)).emit(callback);
 };
 
 // Data Loading

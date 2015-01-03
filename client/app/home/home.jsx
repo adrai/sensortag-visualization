@@ -3,7 +3,9 @@ var React = require('react'),
 
 var ReactBootstrap = require('react-bootstrap'),
   Panel = ReactBootstrap.Panel,
-  store = require('../store');
+  Button = ReactBootstrap.Button,
+  store = require('../store'),
+  actions = require('../actions');
 
 var Home = React.createClass({
 
@@ -27,12 +29,23 @@ var Home = React.createClass({
     this.setState(this.getInitialState());
   },
 
+  onConnect: function () {
+    actions.cmd.connect(this.state.sensor.id, function (evt) { console.log(evt); });
+  },
+
+  onDisconnect: function () {
+    actions.cmd.disconnect(this.state.sensor.id, function (evt) { console.log(evt); });
+  },
+
   render: function () {
     var presentData = this.state.sensor ? this.state.sensor : {};
 
+    var divStyle = {'margin-top': -6};
+
     var connectionState = (
       <div className="alert alert-danger" role="alert">
-        <span className="fa fa-unlink" aria-hidden="true"></span> Not Connected!
+        <span className="fa fa-unlink " aria-hidden="true"></span> Not Connected!
+        <Button className="pull-right" style={divStyle} onClick={this.onConnect}>connect</Button>
       </div>
     );
 
@@ -40,12 +53,14 @@ var Home = React.createClass({
       connectionState = (
         <div className="alert alert-success" role="alert">
           <span className="fa fa-link" aria-hidden="true"></span> Connected!
+          <Button className="pull-right" style={divStyle} onClick={this.onDisconnect}>disconnect</Button>
         </div>
       );
     } else if (presentData.state === 'discovered') {
       connectionState = (
         <div className="alert alert-warning" role="alert">
           <span className="fa fa-unlink" aria-hidden="true"></span> Discovered!
+          <Button className="pull-right" style={divStyle} onClick={this.onConnect}>connect</Button>
         </div>
       );
     }

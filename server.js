@@ -15,7 +15,16 @@ var LOGGER = logging.init(options.logging).getLogger('server');
 
 var web = webserver(options);
 var socket = socketserver(options);
-var sensor = sensortag(options.sensorSimulation);
+var sensor = sensortag(options.enableSensorSimulation);
+
+socket.on('command', function (cmd) {
+  if (LOGGER.level === 'debug') {
+    LOGGER.debug('(host -> sensortag) | Received COMMAND "' + cmd.name + '" with id: "' + cmd.id + '" ==> \n' + JSON.stringify(cmd, null, 4));
+  } else {
+    LOGGER.info('(host -> sensortag) | Received COMMAND "' + cmd.name + '" with id: "' + cmd.id + '"');
+  }
+  sensor.emit('command', cmd);
+});
 
 denormalizer(options.repository, function (err, denorm) {
   if (err) {
