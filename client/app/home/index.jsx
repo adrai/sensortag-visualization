@@ -8,6 +8,6 @@ module.exports = React.createClass({
   bundle: require('bundle?lazy!./home.jsx'),
 
   preRender: function () {
-    return <div>Loading...</div>
+    return <div><i className="fa fa-spinner fa-spin"></i> Loading...</div>
   }
 });

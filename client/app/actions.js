@@ -12,6 +12,7 @@ var actions = {
   ]),
 
   evt: Reflux.createActions([
+    'discovered',
     'connected',
     'disconnected',
     'rssiUpdated'

@@ -2,6 +2,7 @@ var React = require('react');
 
 require('./app.styl');
 require('../vendor/bootstrap/css/bootstrap.min.css');
+require('../vendor/font-awesome/css/font-awesome.min.css');
 
 var Router = require('react-router'),
     RouteHandler = Router.RouteHandler,

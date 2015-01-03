@@ -3,9 +3,6 @@ var React = require('react'),
 
 var ReactBootstrap = require('react-bootstrap'),
   Panel = ReactBootstrap.Panel,
-  ListGroup = ReactBootstrap.ListGroup,
-  ListGroupItem = ReactBootstrap.ListGroupItem,
-  Label = ReactBootstrap.Label,
   store = require('../store');
 
 var Home = React.createClass({
@@ -33,19 +30,46 @@ var Home = React.createClass({
   render: function () {
     var presentData = this.state.sensor ? this.state.sensor : {};
 
-    var list = [];
-    for (var m in presentData) {
-      list.push(<ListGroupItem><Label>{m}:</Label> {presentData[m]}</ListGroupItem>);
+    var connectionState = (
+      <div className="alert alert-danger" role="alert">
+        <span className="fa fa-unlink" aria-hidden="true"></span> Not Connected!
+      </div>
+    );
+
+    if (presentData.state === 'connected') {
+      connectionState = (
+        <div className="alert alert-success" role="alert">
+          <span className="fa fa-link" aria-hidden="true"></span> Connected!
+        </div>
+      );
+    } else if (presentData.state === 'discovered') {
+      connectionState = (
+        <div className="alert alert-warning" role="alert">
+          <span className="fa fa-unlink" aria-hidden="true"></span> Discovered!
+        </div>
+      );
     }
 
     return (
       <div>
-        <div>Home</div>
-        <div>Hi @adrai</div>
-        <Panel header={presentData.localName}>
-          <ListGroup>
-            {list}
-          </ListGroup>
+        <Panel header={presentData.localName + ' (' + presentData.uuid + ')'}>
+          {connectionState}
+          <dl className="dl-horizontal">
+            <dt>uuid</dt>
+            <dd>{presentData.uuid}</dd>
+            <dt>name</dt>
+            <dd>{presentData.localName}</dd>
+            <dt>system id</dt>
+            <dd>{presentData.systemId}</dd>
+            <dt>manufacturer name</dt>
+            <dd>{presentData.manufacturerName}</dd>
+            <dt>firmware revision</dt>
+            <dd>{presentData.firmwareRevision}</dd>
+            <dt><i className="fa fa-wifi"></i> rssi</dt>
+            <dd>{presentData.rssi}</dd>
+            <dt>state</dt>
+            <dd>{presentData.state}</dd>
+          </dl>
         </Panel>
       </div>
     );
