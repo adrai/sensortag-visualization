@@ -1,7 +1,8 @@
 'use strict';
 
 var Reflux = require('reflux'),
-  actions = require('./actions');
+  actions = require('./actions'),
+  _ = require('lodash');
 
 // assert we load that
 require('./eventHandler');
@@ -32,7 +33,7 @@ module.exports = Reflux.createStore({
 
   // events
   onDiscovered: function (sensor) {
-    this.sensor = sensor;
+    _.extend(this.sensor, sensor);
     this.sensor.state = 'discovered';
 
     console.log('updated sensor info: [discovered]');
@@ -40,7 +41,7 @@ module.exports = Reflux.createStore({
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },
   onConnected: function (sensor) {
-    this.sensor = sensor;
+    _.extend(this.sensor, sensor);
     this.sensor.state = 'connected';
 
     console.log('updated sensor info: [connected]');
@@ -49,7 +50,7 @@ module.exports = Reflux.createStore({
   },
 
   onDisconnected: function (sensor) {
-    this.sensor = sensor;
+    _.extend(this.sensor, sensor);
     this.sensor.state = 'disconnected';
 
     console.log('updated sensor info: [disconnected]');
@@ -61,6 +62,15 @@ module.exports = Reflux.createStore({
     this.sensor.rssi = rssi;
 
     console.log('updated sensor info: [rssiUpdated]');
+
+    this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
+  },
+
+  onTemperatureChanged: function (temperature) {
+    this.sensor.sensorValues.objectTemperature = temperature.objectTemperature;
+    this.sensor.sensorValues.ambientTemperature = temperature.ambientTemperature;
+
+    console.log('updated sensor info: [temperatureChanged]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },

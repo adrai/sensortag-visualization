@@ -21,7 +21,9 @@ var actions = {
     'discovered',
     'connected',
     'disconnected',
-    'rssiUpdated'
+    'rssiUpdated',
+
+    'temperatureChanged'
   ])
 
 };

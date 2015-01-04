@@ -1,0 +1,14 @@
+{
+  "settings": {
+    "ecmascript": 6,
+    "jsx": true
+  },
+  "rules": {
+    "no-use-before-define": 0,
+    "no-multi-spaces": 0,
+    "no-multi-str": 0
+  },
+  "globals": {
+    "FormData": false
+  }
+}

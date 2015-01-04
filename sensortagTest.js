@@ -55,7 +55,7 @@ SensorTag.discover(function(sensorTag) {
       },
       function(callback) {
         console.log('readSoftwareRevision');
-        sensorTag.readHardwareRevision(function(softwareRevision) {
+        sensorTag.readSoftwareRevision(function(softwareRevision) {
           console.log('\tsoftware revision = ' + softwareRevision);
           callback();
         });
@@ -67,6 +67,8 @@ SensorTag.discover(function(sensorTag) {
           callback();
         });
       },
+
+      // now it's interesting...
       function(callback) {
         console.log('enableIrTemperature');
         sensorTag.enableIrTemperature(callback);

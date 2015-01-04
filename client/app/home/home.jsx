@@ -3,6 +3,7 @@ var React = require('react'),
 
 var ReactBootstrap = require('react-bootstrap'),
   Panel = ReactBootstrap.Panel,
+  PanelGroup = ReactBootstrap.PanelGroup,
   Button = ReactBootstrap.Button,
   store = require('../store'),
   actions = require('../actions');
@@ -38,7 +39,7 @@ var Home = React.createClass({
   },
 
   render: function () {
-    var presentData = this.state.sensor ? this.state.sensor : {};
+    var presentData = this.state.sensor ? this.state.sensor : { sensorValues: {} };
 
     var divStyle = {'margin-top': -6};
 
@@ -67,25 +68,35 @@ var Home = React.createClass({
 
     return (
       <div>
-        <Panel header={presentData.localName + ' (' + presentData.uuid + ')'}>
-          {connectionState}
-          <dl className="dl-horizontal">
-            <dt>uuid</dt>
-            <dd>{presentData.uuid}</dd>
-            <dt>name</dt>
-            <dd>{presentData.localName}</dd>
-            <dt>system id</dt>
-            <dd>{presentData.systemId}</dd>
-            <dt>manufacturer name</dt>
-            <dd>{presentData.manufacturerName}</dd>
-            <dt>firmware revision</dt>
-            <dd>{presentData.firmwareRevision}</dd>
-            <dt><i className="fa fa-wifi"></i> rssi</dt>
-            <dd>{presentData.rssi}</dd>
-            <dt>state</dt>
-            <dd>{presentData.state}</dd>
-          </dl>
-        </Panel>
+        <PanelGroup defaultActiveKey='1'>
+          <Panel header={presentData.localName + ' (' + presentData.uuid + ')'} eventKey='1'>
+            {connectionState}
+            <dl className="dl-horizontal">
+              <dt>uuid</dt>
+              <dd>{presentData.uuid}</dd>
+              <dt>name</dt>
+              <dd>{presentData.localName}</dd>
+              <dt>system id</dt>
+              <dd>{presentData.systemId}</dd>
+              <dt>manufacturer name</dt>
+              <dd>{presentData.manufacturerName}</dd>
+              <dt>firmware revision</dt>
+              <dd>{presentData.firmwareRevision}</dd>
+              <dt><i className="fa fa-wifi"></i> rssi</dt>
+              <dd>{presentData.rssi}</dd>
+              <dt>state</dt>
+              <dd>{presentData.state}</dd>
+            </dl>
+          </Panel>
+          <Panel header={presentData.localName + ' (' + presentData.uuid + ') sensor values'} eventKey='2'>
+            <dl className="dl-horizontal">
+              <dt>object temperature</dt>
+              <dd>{presentData.sensorValues.objectTemperature} °C</dd>
+              <dt>ambient temperature</dt>
+              <dd>{presentData.sensorValues.ambientTemperature} °C</dd>
+            </dl>
+          </Panel>
+        </PanelGroup>
       </div>
     );
   }

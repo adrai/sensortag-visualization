@@ -11,3 +11,5 @@ handler.bind('discovered');
 handler.bind('connected');
 handler.bind('disconnected');
 handler.bind('rssiUpdated');
+
+handler.bind('temperatureChanged');
