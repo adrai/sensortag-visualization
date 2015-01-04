@@ -11,7 +11,7 @@ var settings = {
 };
 
 settings.logging = {
-  level: settings.debug ? 'debug': 'info',
+  level: settings.debug ? 'debug' : 'info',
   timestamp: false,
   enableWebLog: false
 };
