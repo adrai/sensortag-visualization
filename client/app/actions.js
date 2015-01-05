@@ -14,7 +14,9 @@ var actions = {
 
   cmd: Reflux.createActions([
     'connect',
-    'disconnect'
+    'disconnect',
+
+    'kill'
   ]),
 
   evt: Reflux.createActions([
@@ -36,6 +38,9 @@ actions.cmd.connect.preEmit = function (sensorTagId, callback) {
 };
 actions.cmd.disconnect.preEmit = function (sensorTagId, callback) {
   (new Command('disconnect', sensorTagId)).emit(callback);
+};
+actions.cmd.kill.preEmit = function (callback) {
+  (new Command('kill')).emit(callback);
 };
 
 // Data Loading

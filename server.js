@@ -23,6 +23,13 @@ socket.on('command', function (cmd) {
   } else {
     LOGGER.info('(host -> sensortag) | Received COMMAND "' + cmd.name + '" with id: "' + cmd.id + '"');
   }
+
+  if (cmd.name === 'kill') {
+    logger.warn('Killing myself, since I got a kill command...');
+    process.exit(1);
+    return;
+  }
+
   sensor.emit('command', cmd);
 });
 

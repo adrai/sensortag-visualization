@@ -33,6 +33,22 @@ settings.port = 1987;
 
 settings.enableSensorSimulation = true;
 
+
+
+if (process.env.DEPLOY_TYPE === 'edison') {
+  settings.enableSensorSimulation = false;
+
+  (function killBluetoothd () {
+    console.log('Unblocking BLE...');
+    function puts(error, stdout, stderr) { console.log(arguments); }
+    require('child_process').exec("rfkill unblock bluetooth", puts);
+    require('child_process').exec("killall bluetoothd", puts);
+    require('child_process').exec("hciconfig hci0 up", puts);
+  })();
+}
+
+
+
 // process.env.DEPLOY_TYPE = process.env.DEPLOY_TYPE || 'local';
 
 // if (process.env.DEPLOY_TYPE && fs.existsSync(path.join(__dirname, 'settings/' + process.env.DEPLOY_TYPE + '.js'))) {
