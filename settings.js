@@ -34,8 +34,7 @@ settings.port = 1987;
 settings.enableSensorSimulation = true;
 
 
-
-if (process.env.DEPLOY_TYPE === 'edison') {
+if (process.env.DEPLOY_TYPE === 'edison' || process.argv.length === 3 && process.argv[2] === 'edison') {
   settings.enableSensorSimulation = false;
 
   (function killBluetoothd () {
