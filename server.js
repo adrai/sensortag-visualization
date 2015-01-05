@@ -25,7 +25,7 @@ socket.on('command', function (cmd) {
   }
 
   if (cmd.name === 'kill') {
-    logger.warn('Killing myself, since I got a kill command...');
+    LOGGER.warn('Killing myself, since I got a kill command...');
     process.exit(1);
     return;
   }
