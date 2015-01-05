@@ -24,7 +24,8 @@ var actions = {
     'rssiUpdated',
 
     'temperatureChanged',
-    'humidityChanged'
+    'humidityChanged',
+    'barometricPressureChanged'
   ])
 
 };

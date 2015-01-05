@@ -82,6 +82,14 @@ module.exports = Reflux.createStore({
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },
 
+  onBarometricPressureChanged: function (pressure) {
+    this.sensor.sensorValues.barometricPressure = pressure;
+
+    console.log('updated sensor info: [barometricPressureChanged]');
+
+    this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
+  },
+
   getSensor: function () {
     if (!this.loaded) {
       actions.server.loadSensor();

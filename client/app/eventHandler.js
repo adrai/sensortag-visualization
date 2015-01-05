@@ -14,3 +14,4 @@ handler.bind('rssiUpdated');
 
 handler.bind('temperatureChanged');
 handler.bind('humidityChanged');
+handler.bind('barometricPressureChanged');

@@ -76,6 +76,8 @@ var Home = React.createClass({
             <dd>{presentData.sensorValues.temperature} °C</dd>
             <dt>humidity</dt>
             <dd>{presentData.sensorValues.humidity}% rH</dd>
+            <dt>pressure</dt>
+            <dd>{presentData.sensorValues.barometricPressure} hPa (1 hPa = 1 mBar)</dd>
           </dl>
         </Panel>
       );
