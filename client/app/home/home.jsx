@@ -100,7 +100,7 @@ var Home = React.createClass({
               <dt>firmware revision</dt>
               <dd>{presentData.firmwareRevision}</dd>
               <dt><i className="fa fa-wifi"></i> rssi</dt>
-              <dd>{presentData.rssi}</dd>
+              <dd>{presentData.rssi} dBm</dd>
               <dt>state</dt>
               <dd>{presentData.state}</dd>
             </dl>
