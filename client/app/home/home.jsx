@@ -66,6 +66,21 @@ var Home = React.createClass({
       );
     }
 
+    var detailPanel = {};
+
+    if (presentData.state === 'connected') {
+      detailPanel = (
+        <Panel header={presentData.localName + ' (' + presentData.uuid + ') sensor values'} eventKey='2'>
+          <dl className="dl-horizontal">
+            <dt>temperature</dt>
+            <dd>{presentData.sensorValues.temperature} °C</dd>
+            <dt>humidity</dt>
+            <dd>{presentData.sensorValues.humidity}% rH</dd>
+          </dl>
+        </Panel>
+      );
+    }
+
     return (
       <div>
         <PanelGroup defaultActiveKey='1'>
@@ -88,14 +103,7 @@ var Home = React.createClass({
               <dd>{presentData.state}</dd>
             </dl>
           </Panel>
-          <Panel header={presentData.localName + ' (' + presentData.uuid + ') sensor values'} eventKey='2'>
-            <dl className="dl-horizontal">
-              <dt>object temperature</dt>
-              <dd>{presentData.sensorValues.objectTemperature} °C</dd>
-              <dt>ambient temperature</dt>
-              <dd>{presentData.sensorValues.ambientTemperature} °C</dd>
-            </dl>
-          </Panel>
+          {detailPanel}
         </PanelGroup>
       </div>
     );

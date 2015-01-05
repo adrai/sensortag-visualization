@@ -13,3 +13,4 @@ handler.bind('disconnected');
 handler.bind('rssiUpdated');
 
 handler.bind('temperatureChanged');
+handler.bind('humidityChanged');

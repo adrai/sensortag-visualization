@@ -67,10 +67,17 @@ module.exports = Reflux.createStore({
   },
 
   onTemperatureChanged: function (temperature) {
-    this.sensor.sensorValues.objectTemperature = temperature.objectTemperature;
-    this.sensor.sensorValues.ambientTemperature = temperature.ambientTemperature;
+    this.sensor.sensorValues.temperature = temperature;
 
     console.log('updated sensor info: [temperatureChanged]');
+
+    this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
+  },
+
+  onHumidityChanged: function (humidity) {
+    this.sensor.sensorValues.humidity = humidity;
+
+    console.log('updated sensor info: [humidityChanged]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
   },

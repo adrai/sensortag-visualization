@@ -23,7 +23,8 @@ var actions = {
     'disconnected',
     'rssiUpdated',
 
-    'temperatureChanged'
+    'temperatureChanged',
+    'humidityChanged'
   ])
 
 };
