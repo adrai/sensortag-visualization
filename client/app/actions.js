@@ -9,7 +9,11 @@ var actions = {
   server: Reflux.createActions([
     'loadSensor',
     'loadedSensor',
-    'failedLoadingSensor'
+    'failedLoadingSensor',
+
+    'loadTemperatureStats',
+    'loadedTemperatureStats',
+    'failedLoadingTemperatureStats'
   ]),
 
   cmd: Reflux.createActions([
@@ -51,6 +55,16 @@ actions.server.loadSensor.preEmit = function () {
     }
 
     return actions.server.loadedSensor(data);
+  });
+};
+
+actions.server.loadTemperatureStats.preEmit = function () {
+  api.getTemperatureStats(function (err, data) {
+    if (err) {
+      return actions.server.failedLoadingTemperatureStats(err);
+    }
+
+    return actions.server.loadedTemperatureStats(data);
   });
 };
 

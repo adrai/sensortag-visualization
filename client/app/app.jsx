@@ -36,11 +36,11 @@ module.exports = React.createClass({
                 someparam="hello">
                 Home
               </NavItemLink>
-              {/*<NavItemLink
-                to="todos"
+              <NavItemLink
+                to="stats"
                 someparam="hello2">
-                Todos
-              </NavItemLink>*/}
+                Stats
+              </NavItemLink>
               <Button className="pull-right" onClick={this.onKill}>kill</Button>
             </Nav>
           </Navbar>

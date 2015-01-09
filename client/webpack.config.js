@@ -13,7 +13,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.jsx$/, loaders: ['react-hot-loader', 'jsx-loader?harmony'] },
+      { test: /\.(jsx$|js)$/, loaders: ['react-hot-loader', 'jsx-loader?harmony'] },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }, // inline base64 URLs for <=8k images, direct URLs for the rest

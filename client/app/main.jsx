@@ -13,11 +13,12 @@ hub.init({ host: window.location.protocol + '//' + window.location.host });
 
 var App = require('./app.jsx');
 var Home = require('./home/index.jsx');
+var Stats = require('./stats/index.jsx');
 
 var routes = (
   <Route name="layout" path="/" handler={App}>
     <DefaultRoute name="home" handler={Home} />
-    {/*<Route name="todos" handler={Todos} />*/}
+    <Route name="stats" handler={Stats} />
   </Route>
 );
 
