@@ -41,7 +41,7 @@ var Home = React.createClass({
   render: function () {
     var presentData = this.state.sensor ? this.state.sensor : { sensorValues: {} };
 
-    var divStyle = {'margin-top': -6};
+    var divStyle = {'marginTop': -6};
 
     var connectionState = (
       <div className="alert alert-danger" role="alert">

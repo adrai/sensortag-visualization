@@ -32,14 +32,20 @@ module.exports = React.createClass({
           <Navbar>
             <Nav>
               <NavItemLink
-                to="home"
-                someparam="hello">
+                to="home">
                 Home
               </NavItemLink>
               <NavItemLink
-                to="stats"
-                someparam="hello2">
-                Stats
+                to="temperatureStats">
+                Temperature Stats
+              </NavItemLink>
+              <NavItemLink
+                to="humidityStats">
+                Humidity Stats
+              </NavItemLink>
+              <NavItemLink
+                to="pressureStats">
+                Pressure Stats
               </NavItemLink>
               <Button className="pull-right" onClick={this.onKill}>kill</Button>
             </Nav>

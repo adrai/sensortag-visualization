@@ -13,7 +13,15 @@ var actions = {
 
     'loadTemperatureStats',
     'loadedTemperatureStats',
-    'failedLoadingTemperatureStats'
+    'failedLoadingTemperatureStats',
+
+    'loadHumidityStats',
+    'loadedHumidityStats',
+    'failedLoadingHumidityStats',
+
+    'loadPressureStats',
+    'loadedPressureStats',
+    'failedLoadingPressureStats'
   ]),
 
   cmd: Reflux.createActions([
@@ -65,6 +73,26 @@ actions.server.loadTemperatureStats.preEmit = function () {
     }
 
     return actions.server.loadedTemperatureStats(data);
+  });
+};
+
+actions.server.loadHumidityStats.preEmit = function () {
+  api.getHumidityStats(function (err, data) {
+    if (err) {
+      return actions.server.failedLoadingHumidityStats(err);
+    }
+
+    return actions.server.loadedHumidityStats(data);
+  });
+};
+
+actions.server.loadPressureStats.preEmit = function () {
+  api.getPressureStats(function (err, data) {
+    if (err) {
+      return actions.server.failedLoadingPressureStats(err);
+    }
+
+    return actions.server.loadedPressureStats(data);
   });
 };
 

@@ -20,6 +20,24 @@ var api = {
       }
       return callback(null, res.body.response.stats);
     });
+  },
+
+  getHumidityStats: function (callback) {
+    request.get('/data/stats/humidity', function (res) {
+      if (!res || !res.body || !res.body.response || !res.body.response.stats) {
+        return callback(null, []);
+      }
+      return callback(null, res.body.response.stats);
+    });
+  },
+
+  getPressureStats: function (callback) {
+    request.get('/data/stats/pressure', function (res) {
+      if (!res || !res.body || !res.body.response || !res.body.response.stats) {
+        return callback(null, []);
+      }
+      return callback(null, res.body.response.stats);
+    });
   }
 
 };

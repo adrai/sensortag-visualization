@@ -15,13 +15,38 @@ function callbackName(string){
 }
 function addQueueHandler(context, fcName) {
   context['_' + fcName] = function() {
-    context[fcName].apply(context, arguments);
+    if (context.cacheEvents) {
+      context.queue.push({
+        handler: fcName,
+        args: arguments
+      });
+    } else {
+      context[fcName].apply(context, arguments);
+    }
   };
   return '_' + fcName;
 }
 
 Reflux.createStore = function (definitions) {
   _.extend(definitions, {
+
+    queue: [],
+
+    cacheEvents: true,
+
+    dequeue: function () {
+      while (this.queue.length > 0) {
+        var evt = this.queue.shift();
+        console.log(evt);
+        this[evt.handler].apply(this, evt.args);
+      }
+      this.cacheEvents = false;
+    },
+
+    startQueueing: function () {
+      this.cacheEvents = true;
+    },
+
     listenToEvents: function(listenables) {
       for(var key in listenables){
         var cbname = callbackName(key),

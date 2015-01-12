@@ -1,5 +1,5 @@
 var React = require('react');
-var AsyncReactComponent = require('../../common/async');
+var AsyncReactComponent = require('../../../common/async');
 
 module.exports = React.createClass({
 

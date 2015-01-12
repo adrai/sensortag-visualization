@@ -13,12 +13,16 @@ hub.init({ host: window.location.protocol + '//' + window.location.host });
 
 var App = require('./app.jsx');
 var Home = require('./home/index.jsx');
-var Stats = require('./stats/index.jsx');
+var TemperatureStats = require('./stats/temperature/index.jsx');
+var HumidityStats = require('./stats/humidity/index.jsx');
+var PressureStats = require('./stats/pressure/index.jsx');
 
 var routes = (
   <Route name="layout" path="/" handler={App}>
     <DefaultRoute name="home" handler={Home} />
-    <Route name="stats" handler={Stats} />
+    <Route name="temperatureStats" handler={TemperatureStats} />
+    <Route name="humidityStats" handler={HumidityStats} />
+    <Route name="pressureStats" handler={PressureStats} />
   </Route>
 );
 

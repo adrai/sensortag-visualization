@@ -11,12 +11,35 @@ module.exports = Reflux.createStore({
 
   init: function() {
     this.sensor = null;
-    this.stats = {temperature: []};
 
     this.listenToMany(actions.server);
     this.listenToEvents(actions.evt);
+  },
 
-    this.actions = Reflux.createActions(['temperatureStatsChanged']);
+  onLoadSensor: function () {
+    if (!this.loaded) {
+      this.startQueueing();
+    }
+    console.log('loading sensor.');
+  },
+
+  onLoadedSensor: function (sensor) {
+    this.loaded = true;
+    console.log('loaded sensor.');
+    this.sensor = sensor;
+    this.trigger({action: 'loadedSensor', sensor: this.sensor});
+    this.dequeue();
+  },
+
+  onFailedLoadingSensor: function (err) {
+    console.log('failed loading sensor! ', err);
+  },
+
+  getSensor: function () {
+    if (!this.loaded) {
+      actions.server.loadSensor();
+    }
+    return this.sensor;
   },
 
   // events
@@ -60,11 +83,6 @@ module.exports = Reflux.createStore({
     console.log('updated sensor info: [temperatureChanged]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
-
-    if (this.stats.temperature.length > 0) {
-      this.stats.temperature.push({ date: Date.now(), value: temperature });
-      this.actions.temperatureStatsChanged(this.stats.temperature);
-    }
   },
 
   onHumidityChanged: function (humidity) {
@@ -81,51 +99,6 @@ module.exports = Reflux.createStore({
     console.log('updated sensor info: [barometricPressureChanged]');
 
     this.trigger({action: 'sensorInfoChanged', sensor: this.sensor});
-  },
-
-  onLoadSensor: function () {
-    console.log('loading sensor.');
-  },
-
-  onLoadedSensor: function (sensor) {
-    this.loaded = true;
-    console.log('loaded sensor.');
-    this.sensor = sensor;
-    this.trigger({action: 'loadedSensor', sensor: this.sensor});
-  },
-
-  onFailedLoadingSensor: function (err) {
-    console.log('failed loading sensor! ', err);
-  },
-
-  getSensor: function () {
-    if (!this.loaded) {
-      actions.server.loadSensor();
-    }
-    return this.sensor;
-  },
-
-  onLoadTemperatureStats: function () {
-    console.log('loading temperature stats.');
-  },
-
-  onLoadedTemperatureStats: function (stats) {
-    console.log('loaded temperature stats.');
-    //this.stats.temperature = stats;
-    this.trigger({action: 'loadedTemperatureStats', temperatureStats: this.stats.temperature});
-  },
-
-  onFailedLoadingTemperatureStats: function (err) {
-    console.log('failed loading temperature stats! ', err);
-  },
-
-  getTemperatureStats: function (clb) {
-    var self = this;
-    actions.server.loadedTemperatureStats.listen(function (temperatureStats) {
-      self.stats.temperature = temperatureStats;
-      clb(null, temperatureStats);
-    });
-    actions.server.loadTemperatureStats();
   }
 
 });
