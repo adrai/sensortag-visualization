@@ -32,7 +32,7 @@ hub.on('offline', function () {
 
 hub.on('online', function () {
   console.log('socket online');
-  Router.run(routes, function (Handler) {
+  Router.run(routes, Router.HistoryLocation, function (Handler) {
     React.render(<Handler/>, document.body);
   });
 });
