@@ -8,6 +8,10 @@ var ReactBootstrap = require('react-bootstrap'),
   store = require('../store'),
   actions = require('../actions');
 
+var mui = require('material-ui'),
+  Tabs = mui.Tabs,
+  Tab = mui.Tab;
+
 var Home = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
@@ -66,12 +70,21 @@ var Home = React.createClass({
       );
     }
 
-    var detailPanel = {};
+    var marginTop = { 'margin-top': 10 };
+
+    var detailPanel = (
+      <Tab label='sensor values'>
+        {connectionState}
+        <dl style={marginTop} className="dl-horizontal">
+          <dt>no sensor values at the moment</dt>
+        </dl>
+      </Tab>
+    );
 
     if (presentData.state === 'connected') {
       detailPanel = (
-        <Panel header={presentData.localName + ' (' + presentData.uuid + ') sensor values'} eventKey='2'>
-          <dl className="dl-horizontal">
+        <Tab label='sensor values'> 
+          <dl style={marginTop} className="dl-horizontal">
             <dt>temperature</dt>
             <dd>{presentData.sensorValues.temperature} °C</dd>
             <dt>humidity</dt>
@@ -79,16 +92,22 @@ var Home = React.createClass({
             <dt>pressure</dt>
             <dd>{presentData.sensorValues.barometricPressure} hPa (1 hPa = 1 mBar)</dd>
           </dl>
-        </Panel>
+        </Tab>
       );
     }
 
+    var marginLeft = { 'margin-left': 10 };
+
     return (
       <div>
-        <PanelGroup defaultActiveKey='1'>
-          <Panel header={presentData.localName + ' (' + presentData.uuid + ')'} eventKey='1'>
+        <div>
+          <h3 style={marginLeft}>{presentData.localName /*+ ' (' + presentData.uuid + ')'*/}</h3>
+        </div>
+        <Tabs>
+          {detailPanel}
+          <Tab label='device'> 
             {connectionState}
-            <dl className="dl-horizontal">
+            <dl className="dl-horizontal" style={marginTop}>
               <dt>uuid</dt>
               <dd>{presentData.uuid}</dd>
               <dt>name</dt>
@@ -104,9 +123,8 @@ var Home = React.createClass({
               <dt>state</dt>
               <dd>{presentData.state}</dd>
             </dl>
-          </Panel>
-          {detailPanel}
-        </PanelGroup>
+          </Tab>
+        </Tabs>
       </div>
     );
   }

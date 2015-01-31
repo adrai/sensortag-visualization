@@ -10,6 +10,7 @@ var ReactBootstrap = require('react-bootstrap'),
   storeSensor = require('../../store'),
   store = require('./store'),
   actions = require('../../actions'),
+  env = require('../../../common/env'),
   _ = require('lodash');
 
 var Home = React.createClass({
@@ -17,12 +18,14 @@ var Home = React.createClass({
   mixins: [Reflux.ListenerMixin],
 
   propTypes: {
+    chartWidth: React.PropTypes.number,
     sensor: React.PropTypes.object,
     stats: React.PropTypes.array
   },
 
   getInitialState: function () {
     return {
+      chartWidth: env.window.width - 100,
       sensor: storeSensor.getSensor(),
       stats: store.getHumidityStats()
     };
@@ -41,16 +44,21 @@ var Home = React.createClass({
     var sensorData = this.state.sensor ? this.state.sensor : { sensorValues: {} };
     var statsData = this.state.stats ? this.state.stats : [];
 
+    var interval = 1;
+    if (this.state.chartWidth/24 < 20) {
+      interval = 3
+    }
+
     return (
       <div>
         <PanelGroup defaultActiveKey='1'>
-          <Panel header={sensorData.localName + ' (' + sensorData.uuid + ') humidity'} eventKey='1'>
+          <Panel header={sensorData.localName + ' humidity'} eventKey='1'>
             <AreaChart
               data={statsData}
-              width={400}
+              width={this.state.chartWidth}
               height={300}
               yAxisTickCount={4}
-              xAxisTickInterval={{unit: 'minute', interval: 5}}
+              xAxisTickInterval={{unit: 'hour', interval: interval}}
               title='Humidity Chart'
             />
           </Panel>

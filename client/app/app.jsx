@@ -11,8 +11,9 @@ var Router = require('react-router'),
 var mui = require('material-ui'),
   Toolbar = mui.Toolbar,
   ToolbarGroup = mui.ToolbarGroup,
-  RaisedButton = mui.RaisedButton,
-  FlatButton = mui.FlatButton;
+  Icon = mui.Icon,
+  DropDownMenu = mui.DropDownMenu,
+  FloatingActionButton = mui.FloatingActionButton;
 
 var actions = require('./actions');
 
@@ -22,22 +23,22 @@ module.exports = React.createClass({
 
   render: function () {
 
+    var stats = [
+      { payload: '1', text: '', route: 'home' },
+      { payload: '2', text: 'Temperature', route: 'temperatureStats' },
+      { payload: '3', text: 'Humidity', route: 'humidityStats' },
+      { payload: '4', text: 'Pressure', route: 'pressureStats' }
+    ];
+
     return (
       <div>
         <header>
           <Toolbar>
             <ToolbarGroup key={0} float="left">
-              <FlatButton label="Device" onClick={this.onNavToDevice} />
-            </ToolbarGroup>
-            <ToolbarGroup key={1} float="left">
+              <Icon icon="action-info" onClick={this.onNavToDevice} />
               <span className="mui-toolbar-separator">&nbsp;</span>
-              <FlatButton label="Temperature" onClick={this.onNavToTemperature} />
-              <FlatButton label="Humidity" onClick={this.onNavToHumidity} />
-              <FlatButton label="Pressure" onClick={this.onNavToPressure} />
-            </ToolbarGroup>
-            <ToolbarGroup key={2} float="right">
-              <span className="mui-toolbar-separator">&nbsp;</span>
-              <RaisedButton label="kill" primary={true} onClick={this.onKill} />
+              <DropDownMenu menuItems={stats} onChange={this.onStatsChanged} />
+              <Icon tooltip="kill" style={{ 'color': 'red', 'margin-left': -45, 'font-size': 'smaller' }} icon="alert-warning" onClick={this.onKill} />
             </ToolbarGroup>
           </Toolbar>
         </header>
@@ -48,23 +49,16 @@ module.exports = React.createClass({
     );
   },
 
+  onStatsChanged: function (e, selectedIndex, menuItem) {
+    console.log(arguments);
+    this.transitionTo(menuItem.route);
+  },
+
   onKill: function () {
     actions.cmd.kill(function (evt) { console.log(evt); });
   },
 
   onNavToDevice: function () {
     this.transitionTo('home');
-  },
-
-  onNavToTemperature: function () {
-    this.transitionTo('temperatureStats');
-  },
-
-  onNavToHumidity: function () {
-    this.transitionTo('humidityStats');
-  },
-
-  onNavToPressure: function () {
-    this.transitionTo('pressureStats');
   }
 });
