@@ -15,6 +15,7 @@ module.exports = {
     loaders: [
       { test: /\.(jsx$|js)$/, loaders: ['react-hot-loader', 'jsx-loader?harmony'] },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
+      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }, // inline base64 URLs for <=8k images, direct URLs for the rest
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
