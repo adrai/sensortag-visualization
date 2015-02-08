@@ -39,7 +39,7 @@ if (process.env.DEPLOY_TYPE === 'edison' || process.argv.length === 3 && process
 
   (function killBluetoothd () {
     console.log('Unblocking BLE...');
-    async.series([
+    require('async').series([
       function (callback) {
         require('child_process').exec("rfkill unblock bluetooth", function (error, stdout, stderr) {
           console.log(arguments);
