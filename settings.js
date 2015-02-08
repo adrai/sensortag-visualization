@@ -36,32 +36,7 @@ settings.enableSensorSimulation = true;
 
 if (process.env.DEPLOY_TYPE === 'edison' || process.argv.length === 3 && process.argv[2] === 'edison') {
   settings.enableSensorSimulation = false;
-
-  (function killBluetoothd () {
-    console.log('Unblocking BLE...');
-    require('async').series([
-      function (callback) {
-        require('child_process').exec("rfkill unblock bluetooth", function (error, stdout, stderr) {
-          console.log(arguments);
-          callback(error);
-        });
-      },
-      function (callback) {
-        require('child_process').exec("killall bluetoothd", function (error, stdout, stderr) {
-          console.log(arguments);
-          callback(error);
-        });
-      },
-      function (callback) {
-        require('child_process').exec("hciconfig hci0 up", function (error, stdout, stderr) {
-          console.log(arguments);
-          callback(error);
-        });
-      }
-    ], function () {
-      console.log('Finished unblocking BLE...');
-    });
-  })();
+  process.env.DEPLOY_TYPE = 'edison';
 }
 
 
