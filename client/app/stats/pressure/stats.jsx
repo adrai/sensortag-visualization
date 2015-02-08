@@ -59,7 +59,7 @@ var Home = React.createClass({
               height={300}
               yAxisTickCount={4}
               xAxisTickInterval={{unit: 'hour', interval: interval}}
-              title='Humidity Chart'
+              title='Pressure Chart'
             />
           </Panel>
         </PanelGroup>
