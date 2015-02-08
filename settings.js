@@ -39,10 +39,28 @@ if (process.env.DEPLOY_TYPE === 'edison' || process.argv.length === 3 && process
 
   (function killBluetoothd () {
     console.log('Unblocking BLE...');
-    function puts(error, stdout, stderr) { console.log(arguments); }
-    require('child_process').exec("rfkill unblock bluetooth", puts);
-    require('child_process').exec("killall bluetoothd", puts);
-    require('child_process').exec("hciconfig hci0 up", puts);
+    async.series([
+      function (callback) {
+        require('child_process').exec("rfkill unblock bluetooth", function (error, stdout, stderr) {
+          console.log(arguments);
+          callback(error);
+        });
+      },
+      function (callback) {
+        require('child_process').exec("killall bluetoothd", function (error, stdout, stderr) {
+          console.log(arguments);
+          callback(error);
+        });
+      },
+      function (callback) {
+        require('child_process').exec("hciconfig hci0 up", function (error, stdout, stderr) {
+          console.log(arguments);
+          callback(error);
+        });
+      }
+    ], function () {
+      console.log('Finished unblocking BLE...');
+    });
   })();
 }
 
